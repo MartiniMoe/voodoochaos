@@ -16,4 +16,4 @@ func _fixed_process(delta):
 	if Input.is_action_pressed("player_01_left"):
 		move_x -= move_force
 	
-	move(Vector2(move_x, move_y))
+	self.move(Vector2(move_x, move_y))
