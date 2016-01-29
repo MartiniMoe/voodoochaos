@@ -4,7 +4,7 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
-	var cam = get_node("main_camera")
+	var cam = get_node("Viewport/main_camera")
 	var vp = get_node("Viewport")
 	
 	var cam_speed=0.5
