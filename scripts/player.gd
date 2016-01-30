@@ -3,6 +3,9 @@ extends KinematicBody2D
 var tilemap
 
 var alive = true
+var last_move_time = 0
+var time_elapsed = 0
+var idle_time = .25
 
 func _ready():
 	tilemap = get_parent().get_node("level01")
@@ -12,6 +15,14 @@ func _fixed_process(delta):
 	if alive:
 		move_player()
 		check_collisions()
+	time_elapsed+=delta
+	
+	if (time_elapsed - last_move_time > idle_time):
+		get_node("AnimationPlayer").set_current_animation("idle")
+	else:
+		if (get_node("AnimationPlayer").get_current_animation() != "walk"):
+			get_node("AnimationPlayer").set_current_animation("walk")
+	
 
 func check_collisions():
 	var tile_x = floor(get_pos().x / tilemap.get_cell_size().x)
@@ -34,7 +45,8 @@ func move_player():
 		move_x += move_force
 	if Input.is_action_pressed("player_01_left"):
 		move_x -= move_force
-	
+	if (move_x + move_y) != 0:
+		last_move_time = time_elapsed
 	self.move(Vector2(move_x, move_y))
 
 func die():
