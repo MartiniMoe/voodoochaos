@@ -4,6 +4,9 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
+	#get_node("doll_render").set_texture(get_node("doll").get_render_target_texture())
+	#get_node("doll/Viewport/Camera2D").make_current()
+	
 	var cam = get_node("main_camera")
 	var vp = get_node("Viewport")
 	
