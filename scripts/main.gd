@@ -1,13 +1,11 @@
 extends Node2D
 
 var cam
-var vp
 var doll
 var cam_speed=0.5
 
 func _ready():
 	cam = get_node("main_camera")
-	vp = get_node("Viewport")
 	doll = get_node("doll")
 	set_fixed_process(true)
 
