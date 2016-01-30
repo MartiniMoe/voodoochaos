@@ -55,5 +55,6 @@ func move_player():
 
 func die():
 	get_node("Particles2D").set_emitting(true)
-	get_node("Sprite").set_opacity(0.5)
+	get_node("Sprite").hide()
+	get_node("SpriteDead").show()
 	alive = false
