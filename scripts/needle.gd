@@ -82,13 +82,16 @@ func move_needle():
 	var move_force = 2
 	var move_x = 0
 	var move_y = 0
-	if Input.is_action_pressed("voodoo_down"):
+	var doll_width = get_parent().get_texture().get_width()
+	var doll_height = get_parent().get_texture().get_height()
+	
+	if Input.is_action_pressed("voodoo_down") && get_pos().y < doll_height/2:
 		move_y += move_force
-	if Input.is_action_pressed("voodoo_up"):
+	if Input.is_action_pressed("voodoo_up") && get_pos().y > -doll_height/2:
 		move_y -= move_force
-	if Input.is_action_pressed("voodoo_right"):
+	if Input.is_action_pressed("voodoo_right") && get_pos().x < doll_width/2:
 		move_x += move_force
-	if Input.is_action_pressed("voodoo_left"):
+	if Input.is_action_pressed("voodoo_left")  && get_pos().x > -doll_width/2:
 		move_x -= move_force
 	self.move(Vector2(move_x, move_y))
 
