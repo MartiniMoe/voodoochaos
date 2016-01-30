@@ -39,12 +39,16 @@ func move_player():
 	var move_y = 0
 	if Input.is_action_pressed("player_01_down"):
 		move_y += move_force
+		set_rot(0)
 	if Input.is_action_pressed("player_01_top"):
 		move_y -= move_force
+		set_rot(PI)
 	if Input.is_action_pressed("player_01_right"):
 		move_x += move_force
+		set_rot(PI/2)
 	if Input.is_action_pressed("player_01_left"):
 		move_x -= move_force
+		set_rot(PI+PI/2)
 	if (move_x + move_y) != 0:
 		last_move_time = time_elapsed
 	self.move(Vector2(move_x, move_y))
