@@ -38,4 +38,5 @@ func move_player():
 	self.move(Vector2(move_x, move_y))
 
 func die():
+	get_node("Particles2D").set_emitting(true)
 	alive = false
