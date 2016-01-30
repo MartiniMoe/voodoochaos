@@ -2,13 +2,16 @@ extends KinematicBody2D
 
 var tilemap
 
+var alive = true
+
 func _ready():
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
 
 func _fixed_process(delta):
-	move_player()
-	check_collisions()
+	if alive:
+		move_player()
+		check_collisions()
 
 func check_collisions():
 	var tile_x = floor(get_pos().x / tilemap.get_cell_size().x)
@@ -17,7 +20,7 @@ func check_collisions():
 	var tile_index = tilemap.get_cell(tile_pos.x, tile_pos.y)
 	#print("im on tile #" + str(tile_index) + " " + str(tile_pos.x) + "|" + str(tile_pos.y))
 	if tile_index == 1:
-		print("lava!!!!")
+		die()
 
 func move_player():
 	var move_force = 2
@@ -33,3 +36,6 @@ func move_player():
 		move_x -= move_force
 	
 	self.move(Vector2(move_x, move_y))
+
+func die():
+	alive = false
