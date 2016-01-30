@@ -6,7 +6,6 @@ var cam_speed=0.5
 
 func _ready():
 	cam = get_node("main_camera")
-	doll = get_node("doll")
 	set_fixed_process(true)
 
 func _fixed_process(delta):

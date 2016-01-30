@@ -10,6 +10,7 @@ var idle_time = .25
 func _ready():
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
+	connect("stab", self, "stabbed")
 
 func _fixed_process(delta):
 	if alive:
@@ -62,3 +63,7 @@ func die():
 	get_node("Sprite").hide()
 	get_node("SpriteDead").show()
 	alive = false
+	
+	
+func stabbed(bodypart):
+	print("ouch!" + bodypart)
