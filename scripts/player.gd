@@ -19,7 +19,7 @@ func check_collisions():
 	var tile_pos = tilemap.world_to_map(self.get_pos())
 	var tile_index = tilemap.get_cell(tile_pos.x, tile_pos.y)
 	#print("im on tile #" + str(tile_index) + " " + str(tile_pos.x) + "|" + str(tile_pos.y))
-	if tile_index == 1:
+	if tile_index == 0:
 		die()
 
 func move_player():
@@ -39,4 +39,5 @@ func move_player():
 
 func die():
 	get_node("Particles2D").set_emitting(true)
+	get_node("Sprite").set_opacity(0.5)
 	alive = false
