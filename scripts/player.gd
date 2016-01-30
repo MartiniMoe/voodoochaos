@@ -31,7 +31,12 @@ func check_collisions():
 	var tile_index = tilemap.get_cell(tile_pos.x, tile_pos.y)
 	#print("im on tile #" + str(tile_index) + " " + str(tile_pos.x) + "|" + str(tile_pos.y))
 	if tile_index == 0:
+		get_node("particles_dead").set_emitting(true)
 		die()
+	for body in get_parent().get_node("main_camera/left_wall").get_overlapping_bodies():
+		if body == self:
+			get_node("particles_dead_wall").set_emitting(true)
+			die()
 
 func move_player():
 	var move_force = 2
@@ -54,7 +59,6 @@ func move_player():
 	self.move(Vector2(move_x, move_y))
 
 func die():
-	get_node("Particles2D").set_emitting(true)
 	get_node("Sprite").hide()
 	get_node("SpriteDead").show()
 	alive = false
