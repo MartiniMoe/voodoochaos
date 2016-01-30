@@ -14,4 +14,4 @@ func _fixed_process(delta):
 	
 	cam.make_current()
 	cam.set_pos(Vector2(cam_x, 0))
-	doll.set_pos(Vector2(cam.get_pos().x - (get_viewport().get_rect().end.x/2) + doll.get_texture().get_width(), doll.get_pos().y))
+	
