@@ -100,12 +100,14 @@ func die():
 	
 func punish(punishment):
 	if punishment == "pokeleft":
-		self.move(Vector2(20,0))
+		self.move(Vector2(20,0).rotated(get_rot()))
 	if punishment == "pokeright":
-		self.move(Vector2(-20,0))
+		self.move(Vector2(-20,0).rotated(get_rot()))
 	if punishment == "slower":
 		speed = speed / 2
 	if punishment == "faster":
 		speed = speed * 2
-	
+	if punishment == "stun":
+		speed = 0
+		
 	last_punishment_time = time_elapsed
