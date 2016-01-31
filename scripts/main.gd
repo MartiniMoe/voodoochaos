@@ -14,7 +14,7 @@ func _fixed_process(delta):
 	cam.make_current()
 	cam.set_pos(Vector2(cam_x, 0))
 	
-func stab(bodypart):
+func stab(punishment):
 	for i in range (get_child_count()):
 		if "player" in get_child(i).get_groups():
-			get_child(i).stab(bodypart)
+			get_child(i).punish(punishment)

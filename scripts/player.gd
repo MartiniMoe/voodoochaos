@@ -14,6 +14,12 @@ var last_move_time = 0
 var time_elapsed = 0
 var idle_time = .25
 
+var base_speed = 2
+var speed = base_speed
+
+var last_punishment_time = 0
+var punishment_duration = 1
+
 func _ready():
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
@@ -39,6 +45,8 @@ func _fixed_process(delta):
 	elif (get_node("AnimationPlayer").get_current_animation() != "walk") && !jumping:
 		get_node("AnimationPlayer").set_current_animation("walk")
 	
+	if (time_elapsed - last_punishment_time > punishment_duration):
+		speed = base_speed
 
 func check_collisions():
 	var tile_x = floor(get_pos().x / tilemap.get_cell_size().x)
@@ -59,7 +67,7 @@ func check_collisions():
 			die()
 
 func move_player():
-	var move_force = 2
+	var move_force = speed
 	var move_x = 0
 	var move_y = 0
 	if Input.is_action_pressed("player_"+str(player_number)+"_down") || Input.get_joy_axis(player_number, 1) < -joy_tresh:
@@ -90,5 +98,14 @@ func die():
 	alive = false
 	
 	
-func stab(bodypart):
-	print("ouch!" + str(bodypart))
+func punish(punishment):
+	if punishment == "pokeleft":
+		self.move(Vector2(20,0))
+	if punishment == "pokeright":
+		self.move(Vector2(-20,0))
+	if punishment == "slower":
+		speed = speed / 2
+	if punishment == "faster":
+		speed = speed * 2
+	
+	last_punishment_time = time_elapsed

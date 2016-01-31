@@ -79,7 +79,23 @@ func stab_evaluation():
 			pass
 
 func stab_action(bodypart):
-	emit_signal("stab", bodypart)
+	var punishment = "none"
+	if (bodypart == HEAD):
+		punishment = "stun"
+	if (bodypart == LEG_LEFT):
+		punishment = "slower"
+	if (bodypart == LEG_RIGHT):
+		punishment = "faster"
+	if (bodypart == ARM_LEFT):
+		punishment = "pokeleft"
+	if (bodypart == ARM_RIGHT):
+		punishment = "pokeright"
+	if (bodypart == EYE_LEFT):
+		punishment = "blur"
+	if (bodypart == EYE_RIGHT):
+		punishment = "blind"
+			
+	emit_signal("stab", punishment)
 
 func move_needle():
 	var move_force = 2
