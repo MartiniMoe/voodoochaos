@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal stab
+
 var tremble_strength = 2
 var stab_scale_time = 0.2
 var stab_timeout = 1
@@ -19,8 +21,7 @@ const LEG_RIGHT = 7
 
 func _ready():
 	set_fixed_process(true)
-	add_user_signal("stab")
-	connect("stab", get_node("/root").get_child(0), "stab")
+	connect("stab", get_node("/root/Main"), "stab")
 
 func _fixed_process(delta):
 	tremble()
@@ -78,7 +79,7 @@ func stab_evaluation():
 			pass
 
 func stab_action(bodypart):
-	emit_signal("stab")
+	emit_signal("stab", bodypart)
 
 func move_needle():
 	var move_force = 2

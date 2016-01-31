@@ -17,9 +17,8 @@ var idle_time = .25
 func _ready():
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
-	add_user_signal("stab")
-	connect("stab", self, "stabbed")
-
+	add_to_group("player")
+	
 func _fixed_process(delta):
 	if !jumping && jump_cooldown > 0:
 		jump_cooldown -= delta
@@ -92,4 +91,4 @@ func die():
 	
 	
 func stab(bodypart):
-	print("ouch!")
+	print("ouch!" + str(bodypart))
