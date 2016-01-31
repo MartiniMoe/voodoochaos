@@ -21,8 +21,8 @@ var last_punishment_time = 0
 var punishment_duration = 1
 
 func _ready():
-	leds.set_led(player_number, 0, 0, 0, 0, 0)
-	leds.set_led(player_number, 1, 0, 0, 0, 0)
+	#leds.set_led(player_number, 0, 0, 0, 0, 0)
+	#leds.set_led(player_number, 1, 0, 0, 0, 0)
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
 	add_to_group("player")
