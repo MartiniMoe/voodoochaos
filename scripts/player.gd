@@ -88,7 +88,7 @@ func move_player():
 		set_rot(PI+PI/2)
 	if (move_x + move_y) != 0:
 		last_move_time = time_elapsed
-	if Input.is_action_pressed("player_"+str(player_number)+"_jump") && !jumping && jump_cooldown <= 0:
+	if Input.is_action_pressed("player_"+str(player_number)+"_jump") || Input.is_joy_button_pressed(player_number, 1) && !jumping && jump_cooldown <= 0:
 		jump_cooldown = 0.5
 		jumping = true
 		get_node("AnimationPlayer").set_current_animation("jump")
