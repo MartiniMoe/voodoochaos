@@ -21,6 +21,8 @@ var last_punishment_time = 0
 var punishment_duration = 1
 
 func _ready():
+	leds.set_led(player_number, 0, 0, 0, 0, 0)
+	leds.set_led(player_number, 1, 0, 0, 0, 0)
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
 	add_to_group("player")
@@ -59,6 +61,8 @@ func check_collisions():
 		die()
 	
 	if tile_index == 0 && !jumping:
+		leds.set_led(player_number, 0, 255, 0, 0, 31)
+		leds.set_led(player_number, 1, 255, 0, 0, 31)
 		get_node("particles_dead").set_emitting(true)
 		die()
 	for body in get_parent().get_node("main_camera/left_wall").get_overlapping_bodies():
