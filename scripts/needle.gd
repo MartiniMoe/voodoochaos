@@ -37,6 +37,7 @@ func stab(delta):
 	if stabbed && stab_timer < stab_timeout:
 		stab_timer += delta
 	if stabbed && stab_timer >= stab_timeout:
+		get_parent().get_node("Label").hide()
 		stabbed = false
 		stab_timer = 0
 	#if Input.is_action_pressed("voodoo_stab") && !stabbed && stab_timer == 0:
@@ -99,6 +100,8 @@ func stab_action(bodypart):
 		punishment = "blind"
 			
 	emit_signal("stab", punishment)
+	get_parent().get_node("Label").set_text(punishment)
+	get_parent().get_node("Label").show()
 
 func move_needle():
 	var move_force = 2
