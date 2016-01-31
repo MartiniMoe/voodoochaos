@@ -14,6 +14,7 @@ var idle_time = .25
 func _ready():
 	tilemap = get_parent().get_node("level01")
 	set_fixed_process(true)
+	add_user_signal("stab")
 	connect("stab", self, "stabbed")
 
 func _fixed_process(delta):
@@ -42,6 +43,7 @@ func check_collisions():
 	var tile_y = floor(get_pos().y / tilemap.get_cell_size().y)
 	var tile_pos = tilemap.world_to_map(self.get_pos())
 	var tile_index = tilemap.get_cell(tile_pos.x, tile_pos.y)
+	
 	#print("im on tile #" + str(tile_index) + " " + str(tile_pos.x) + "|" + str(tile_pos.y))
 	if tile_index == 0 && !jumping:
 		get_node("particles_dead").set_emitting(true)
@@ -82,5 +84,5 @@ func die():
 	alive = false
 	
 	
-func stabbed(bodypart):
-	print("ouch!" + bodypart)
+func stab(bodypart):
+	print("ouch!")
