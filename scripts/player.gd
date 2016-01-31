@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 var tilemap
 
+export var player_number = 0
+var joy_tresh = 0.8
+
 var alive = true
 var jumping = false
 var jump_timer = 0
@@ -60,21 +63,21 @@ func move_player():
 	var move_force = 2
 	var move_x = 0
 	var move_y = 0
-	if Input.is_action_pressed("player_01_down"):
+	if Input.is_action_pressed("player_"+str(player_number)+"_down") || Input.get_joy_axis(player_number, 1) < -joy_tresh:
 		move_y += move_force
 		set_rot(0)
-	if Input.is_action_pressed("player_01_top"):
+	if Input.is_action_pressed("player_"+str(player_number)+"_up") || Input.get_joy_axis(player_number, 1) > joy_tresh:
 		move_y -= move_force
 		set_rot(PI)
-	if Input.is_action_pressed("player_01_right"):
+	if Input.is_action_pressed("player_"+str(player_number)+"_right") || Input.get_joy_axis(player_number, 0) > joy_tresh:
 		move_x += move_force
 		set_rot(PI/2)
-	if Input.is_action_pressed("player_01_left"):
+	if Input.is_action_pressed("player_"+str(player_number)+"_left") || Input.get_joy_axis(player_number, 0) < -joy_tresh:
 		move_x -= move_force
 		set_rot(PI+PI/2)
 	if (move_x + move_y) != 0:
 		last_move_time = time_elapsed
-	if Input.is_action_pressed("player_01_jump") && !jumping && jump_cooldown <= 0:
+	if Input.is_action_pressed("player_"+str(player_number)+"_jump") && !jumping && jump_cooldown <= 0:
 		jump_cooldown = 0.5
 		jumping = true
 		get_node("AnimationPlayer").set_current_animation("jump")

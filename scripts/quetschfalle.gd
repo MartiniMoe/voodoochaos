@@ -13,8 +13,8 @@ func _fixed_process(delta):
 	if !quetsch && quetschtimer < quetschintervall:
 		quetschtimer += delta
 	if !quetsch && quetschtimer >= quetschintervall:
-		get_node("lower").apply_impulse(get_node("lower").get_pos(), Vector2(0, -quetschpower))
-		get_node("upper").apply_impulse(get_node("upper").get_pos(), Vector2(0, quetschpower))
+		get_node("lower").apply_impulse(get_node("lower").get_pos(), Vector2(0, -quetschpower*2))
+		get_node("upper").apply_impulse(get_node("upper").get_pos(), Vector2(0, quetschpower*2))
 		quetsch = true
 		quetschtimer = 0
 	if quetsch && quetschtimer < quetschdauer:
