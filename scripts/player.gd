@@ -44,7 +44,10 @@ func check_collisions():
 	var tile_pos = tilemap.world_to_map(self.get_pos())
 	var tile_index = tilemap.get_cell(tile_pos.x, tile_pos.y)
 	
-	#print("im on tile #" + str(tile_index) + " " + str(tile_pos.x) + "|" + str(tile_pos.y))
+	if is_colliding() && "trap" in get_collider().get_groups():
+		get_node("particles_dead").set_emitting(true)
+		die()
+	
 	if tile_index == 0 && !jumping:
 		get_node("particles_dead").set_emitting(true)
 		die()
@@ -81,6 +84,7 @@ func move_player():
 func die():
 	get_node("Sprite").hide()
 	get_node("SpriteDead").show()
+	clear_shapes()
 	alive = false
 	
 	
