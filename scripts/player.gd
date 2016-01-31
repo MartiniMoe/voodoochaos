@@ -70,10 +70,10 @@ func move_player():
 	var move_force = speed
 	var move_x = 0
 	var move_y = 0
-	if Input.is_action_pressed("player_"+str(player_number)+"_down") || Input.get_joy_axis(player_number, 1) < -joy_tresh:
+	if Input.is_action_pressed("player_"+str(player_number)+"_down") || Input.get_joy_axis(player_number, 1) > joy_tresh:
 		move_y += move_force
 		set_rot(0)
-	if Input.is_action_pressed("player_"+str(player_number)+"_up") || Input.get_joy_axis(player_number, 1) > joy_tresh:
+	if Input.is_action_pressed("player_"+str(player_number)+"_up") || Input.get_joy_axis(player_number, 1) < -joy_tresh:
 		move_y -= move_force
 		set_rot(PI)
 	if Input.is_action_pressed("player_"+str(player_number)+"_right") || Input.get_joy_axis(player_number, 0) > joy_tresh:
