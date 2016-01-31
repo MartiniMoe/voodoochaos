@@ -6,6 +6,8 @@ var tremble_strength = 2
 var stab_scale_time = 0.2
 var stab_timeout = 1
 
+var joy_tresh = 0.8
+
 var stabbed = false
 var stab_timer = 0
 var stab_scaled = false
@@ -37,7 +39,8 @@ func stab(delta):
 	if stabbed && stab_timer >= stab_timeout:
 		stabbed = false
 		stab_timer = 0
-	if Input.is_action_pressed("voodoo_stab") && !stabbed && stab_timer == 0:
+	#if Input.is_action_pressed("voodoo_stab") && !stabbed && stab_timer == 0:
+	if Input.is_joy_button_pressed(get_node("/root/Main").voodoo_joystick, 1) && !stabbed && stab_timer == 0:
 		stabbed = true
 		get_node("Sprite").set_scale(Vector2(0.6, 0.6))
 		stab_scaled = true
@@ -104,13 +107,13 @@ func move_needle():
 	var doll_width = get_parent().get_texture().get_width()
 	var doll_height = get_parent().get_texture().get_height()
 	
-	if Input.is_action_pressed("voodoo_down") && get_pos().y < doll_height/2:
+	if (Input.is_action_pressed("voodoo_down") || Input.get_joy_axis(get_node("/root/Main").voodoo_joystick, 1) > joy_tresh) && get_pos().y < doll_height/2:
 		move_y += move_force
-	if Input.is_action_pressed("voodoo_up") && get_pos().y > -doll_height/2:
+	if (Input.is_action_pressed("voodoo_up") || Input.get_joy_axis(get_node("/root/Main").voodoo_joystick, 1) < -joy_tresh) && get_pos().y > -doll_height/2:
 		move_y -= move_force
-	if Input.is_action_pressed("voodoo_right") && get_pos().x < doll_width/2:
+	if (Input.is_action_pressed("voodoo_right") || Input.get_joy_axis(get_node("/root/Main").voodoo_joystick, 0) > joy_tresh) && get_pos().x < doll_width/2:
 		move_x += move_force
-	if Input.is_action_pressed("voodoo_left")  && get_pos().x > -doll_width/2:
+	if (Input.is_action_pressed("voodoo_left") || Input.get_joy_axis(get_node("/root/Main").voodoo_joystick, 0) < -joy_tresh)  && get_pos().x > -doll_width/2:
 		move_x -= move_force
 	self.move(Vector2(move_x, move_y))
 

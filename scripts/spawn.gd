@@ -2,6 +2,7 @@ extends Sprite
 
 var spawn_time = 5
 var time_elapsed = 0
+var spawned_voodoo = false
 
 const colarray = [Color(0, 0, 1), Color(0, 1, 0), Color(0, 1, 1),
 	Color(1, 0, 0), Color(1, 0, 1), Color(1, 1, 0), Color(1, 1, 1), Color(0, 0, 0)]
@@ -20,7 +21,7 @@ func _fixed_process(delta):
 					if "player" in child.get_groups():
 						if child.player_number == i:
 							exists = true
-				if !exists:
+				if !exists && spawned_voodoo && i != get_node("/root/Main").voodoo_joystick:
 					var new_player = player_preload.instance()
 					new_player.player_number = i
 					new_player.set_pos(self.get_pos())
@@ -28,3 +29,6 @@ func _fixed_process(delta):
 					leds.set_led(i, 0, colarray[i%8].r*255, colarray[i%8].g*255, colarray[i%8].b*255, 7)
 					leds.set_led(i, 1, colarray[i%8].r*255, colarray[i%8].g*255, colarray[i%8].b*255, 7)
 					get_node("/root/Main").add_child(new_player)
+				elif !exists && !spawned_voodoo:
+					spawned_voodoo = true
+					get_node("/root/Main").voodoo_joystick = i

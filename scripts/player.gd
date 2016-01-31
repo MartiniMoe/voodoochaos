@@ -6,6 +6,7 @@ export var player_number = 0
 var joy_tresh = 0.8
 
 var alive = true
+var won = false
 var jumping = false
 var jump_timer = 0
 var jump_cooldown = 0
@@ -103,6 +104,7 @@ func die():
 
 func win():
 	clear_shapes()
+	won = true
 	get_node("Sprite").hide()
 	
 func punish(punishment):
