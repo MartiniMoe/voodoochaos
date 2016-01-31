@@ -100,7 +100,10 @@ func die():
 	get_node("SpriteDead").show()
 	clear_shapes()
 	alive = false
-	
+
+func win():
+	clear_shapes()
+	get_node("Sprite").hide()
 	
 func punish(punishment):
 	if punishment == "pokeleft":
