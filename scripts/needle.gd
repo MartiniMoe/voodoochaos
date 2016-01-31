@@ -83,7 +83,7 @@ func stab_evaluation():
 			pass
 
 func stab_action(bodypart):
-	var punishment = "none"
+	var punishment = ""
 	if (bodypart == HEAD):
 		punishment = "stun"
 	if (bodypart == LEG_LEFT):
